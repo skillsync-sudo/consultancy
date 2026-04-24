@@ -1,4 +1,12 @@
+# Apex Consultancy - robots.txt
+# Optimized for high-end technical SEO
+
 User-agent: *
 Allow: /
 
-Sitemap: https://sammir03-bot.github.io/jejc-website-/sitemap.xml
+# Block legacy assets or private directories if they exist
+Disallow: /TRANSFORMATION_SUMMARY.md
+Disallow: /README.md
+
+# Direct crawlers to the new consolidated sitemap
+Sitemap: https://skillsync-sudo.github.io/consultancy/sitemap.xml
