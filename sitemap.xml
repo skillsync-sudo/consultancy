@@ -1,33 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset 
-xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
   <url>
-    <loc>https://sammir03-bot.github.io/jejc-website-/</loc>
-    <priority>1.0</priority>
+    <loc>https://skillsync-sudo.github.io/consultancy/</loc>
+    <lastmod>2026-04-24</lastmod>
+    <priority>1.00</priority>
   </url>
 
   <url>
-    <loc>https://sammir03-bot.github.io/jejc-website-/study-in-japan.html</loc>
+    <loc>https://skillsync-sudo.github.io/consultancy/study-in-japan.html</loc>
+    <lastmod>2026-04-24</lastmod>
+    <priority>0.80</priority>
   </url>
 
   <url>
-    <loc>https://sammir03-bot.github.io/jejc-website-/japan-student-visa.html</loc>
+    <loc>https://skillsync-sudo.github.io/consultancy/japan-student-visa.html</loc>
+    <lastmod>2026-04-24</lastmod>
+    <priority>0.80</priority>
   </url>
 
   <url>
-    <loc>https://sammir03-bot.github.io/jejc-website-/japanese-language-course.html</loc>
+    <loc>https://skillsync-sudo.github.io/consultancy/japanese-language-course.html</loc>
+    <lastmod>2026-04-24</lastmod>
+    <priority>0.80</priority>
   </url>
 
   <url>
-    <loc>https://sammir03-bot.github.io/jejc-website-/cost-of-studying-in-japan.html</loc>
+    <loc>https://skillsync-sudo.github.io/consultancy/cost-of-studying-in-japan.html</loc>
+    <lastmod>2026-04-24</lastmod>
+    <priority>0.70</priority>
   </url>
 
   <url>
-    <loc>https://sammir03-bot.github.io/jejc-website-/part-time-job-in-japan.html</loc>
+    <loc>https://skillsync-sudo.github.io/consultancy/part-time-job-in-japan.html</loc>
+    <lastmod>2026-04-24</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://skillsync-sudo.github.io/consultancy/jobs.html</loc>
+    <lastmod>2026-04-24</lastmod>
+    <priority>0.90</priority>
   </url>
 
 </urlset>
