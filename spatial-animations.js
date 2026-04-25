@@ -7,7 +7,9 @@
     'use strict';
 
     /* ─── 1. AURORA INJECTION ──────────────────────────────────── */
-    if (!document.querySelector('.aurora-container')) {
+    const isMobile = window.matchMedia('(max-width: 768px)').matches || ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+    if (!isMobile && !document.querySelector('.aurora-container')) {
         const el = document.createElement('div');
         el.className = 'aurora-container';
         el.innerHTML = `
@@ -29,17 +31,19 @@
     }, { passive: true });
 
     /* ─── 3. CUSTOM CURSOR ─────────────────────────────────────── */
-    const dot  = document.createElement('div'); dot.id  = 'cursor-dot';
-    const ring = document.createElement('div'); ring.id = 'cursor-ring';
-    document.body.appendChild(dot);
-    document.body.appendChild(ring);
+    if (!isMobile) {
+        const dot  = document.createElement('div'); dot.id  = 'cursor-dot';
+        const ring = document.createElement('div'); ring.id = 'cursor-ring';
+        document.body.appendChild(dot);
+        document.body.appendChild(ring);
 
-    document.addEventListener('mousemove', (e) => {
-        dot.style.left  = e.clientX + 'px';
-        dot.style.top   = e.clientY + 'px';
-        ring.style.left = e.clientX + 'px';
-        ring.style.top  = e.clientY + 'px';
-    }, { passive: true });
+        document.addEventListener('mousemove', (e) => {
+            dot.style.left  = e.clientX + 'px';
+            dot.style.top   = e.clientY + 'px';
+            ring.style.left = e.clientX + 'px';
+            ring.style.top  = e.clientY + 'px';
+        }, { passive: true });
+    }
 
     /* ─── 4. HEADER GLASS ON SCROLL ───────────────────────────── */
     const header = document.getElementById('header');
@@ -129,29 +133,33 @@
     });
 
     /* ─── 8. NON-SYNC FLOAT ────────────────────────────────────── */
-    document.querySelectorAll('.service-card, .course-card, .stat-box').forEach(el => {
-        const dur = (Math.random() * 3.5 + 4.5).toFixed(2);
-        el.style.setProperty('--float-duration', dur + 's');
-        // Only add float class once reveal is complete to avoid conflict
-        el.addEventListener('transitionend', () => {
-            if (el.classList.contains('is-revealed')) {
-                el.classList.add('spatial-float');
-            }
-        }, { once: true });
-    });
+    if (!isMobile) {
+        document.querySelectorAll('.service-card, .course-card, .stat-box').forEach(el => {
+            const dur = (Math.random() * 3.5 + 4.5).toFixed(2);
+            el.style.setProperty('--float-duration', dur + 's');
+            // Only add float class once reveal is complete to avoid conflict
+            el.addEventListener('transitionend', () => {
+                if (el.classList.contains('is-revealed')) {
+                    el.classList.add('spatial-float');
+                }
+            }, { once: true });
+        });
+    }
 
     /* ─── 9. MAGNETIC BUTTONS ──────────────────────────────────── */
-    document.querySelectorAll('.btn, .nav-cta, .btn-enroll').forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const r = btn.getBoundingClientRect();
-            const x = (e.clientX - r.left - r.width  / 2) * 0.18;
-            const y = (e.clientY - r.top  - r.height / 2) * 0.18;
-            btn.style.transform = `translate(${x}px, ${y}px)`;
+    if (!isMobile) {
+        document.querySelectorAll('.btn, .nav-cta, .btn-enroll').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const r = btn.getBoundingClientRect();
+                const x = (e.clientX - r.left - r.width  / 2) * 0.18;
+                const y = (e.clientY - r.top  - r.height / 2) * 0.18;
+                btn.style.transform = `translate(${x}px, ${y}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0,0)';
+            });
         });
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = 'translate(0,0)';
-        });
-    });
+    }
 
     /* ─── 10. GALLERY FILTER (keep existing logic, add transitions) */
     // If filterGallery is globally defined, wrap it for smooth transitions

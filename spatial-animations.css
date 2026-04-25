@@ -605,3 +605,48 @@ body:has(button:hover) #cursor-ring {
     width: 56px; height: 56px;
     border-color: rgba(212,175,55,1);
 }
+
+/* ==========================================================
+   19. MOBILE PERFORMANCE OPTIMIZATIONS
+   Disable heavy effects and infinite animations on mobile
+   ========================================================== */
+@media (max-width: 768px) {
+    /* Disable infinite particle animations / pulses / levitations */
+    .hero::before, .consultation-section::before, .page-header::after {
+        display: none !important;
+        animation: none !important;
+    }
+    
+    .hero-image img, .consultation-icon, .promo-banner {
+        animation: none !important;
+    }
+
+    /* Reduce blur on header and mobile menu for better rendering */
+    .header.scrolled, .mobile-menu.active {
+        backdrop-filter: blur(10px) saturate(150%) !important;
+        -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+    }
+
+    /* Simplify reveal animations */
+    .anim-reveal, .anim-reveal-left, .anim-reveal-right {
+        transition-duration: 0.5s !important;
+        transform: translateY(20px) scale(0.98); /* Less movement */
+    }
+
+    /* Disable hover 3D transforms which may jitter on scroll */
+    .service-card:hover, .course-card:hover, .gallery-item:hover, .testimonial-card:hover, .feature-card:hover {
+        transform: none !important;
+        box-shadow: var(--shadow-sm) !important;
+    }
+
+    /* Hide custom cursor on mobile */
+    #cursor-dot, #cursor-ring {
+        display: none !important;
+    }
+
+    /* Reduce box shadows and transforms on heavy elements */
+    .service-card, .course-card, .stat-box, .testimonial-card, .feature-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+        will-change: auto !important;
+    }
+}
