@@ -472,16 +472,42 @@
    12. HEADER — Transparent → Glass on Scroll (override)
    ---------------------------------------------------------- */
 .header {
+    background: rgba(2, 2, 5, 0.65) !important;
+    color: white !important;
     transition: background 0.5s cubic-bezier(0.45,0.05,0.55,0.95),
                 box-shadow 0.5s cubic-bezier(0.45,0.05,0.55,0.95),
                 border-color 0.5s cubic-bezier(0.45,0.05,0.55,0.95);
 }
+.header .logo-title,
+.header .logo-subtitle,
+.header .desktop-menu a,
+.header .mobile-menu a,
+.header .mobile-toggle span {
+    color: white !important;
+}
+.header .logo-subtitle {
+    color: rgba(255,255,255,0.75) !important;
+}
 .header.scrolled {
-    background: rgba(2, 2, 5, 0.75) !important;
-    backdrop-filter: blur(40px) saturate(200%);
-    -webkit-backdrop-filter: blur(40px) saturate(200%);
-    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(18px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12) !important;
+}
+.header.scrolled .desktop-menu a,
+.header.scrolled .mobile-menu a {
+    color: var(--neutral-800) !important;
+}
+.header.scrolled .desktop-menu a:hover,
+.header.scrolled .mobile-menu a:hover {
+    color: var(--primary) !important;
+}
+.header.scrolled .logo-title {
+    color: var(--primary) !important;
+}
+.header.scrolled .logo-subtitle {
+    color: var(--neutral-500) !important;
 }
 
 /* Nav link hover glow */
