@@ -1085,7 +1085,6 @@ h1, h2, .section-title {
     html, body {
         overflow-x: hidden !important;
         width: 100% !important;
-        max-width: 100vw !important;
         -webkit-text-size-adjust: 100%;
         touch-action: manipulation; /* Prevents 300ms click delay */
     }
@@ -1202,8 +1201,8 @@ p { font-size: clamp(0.9rem, 2vw, 1.1rem); }
     }
 
     /* 6. HIDE DESKTOP MENU, SHOW MOBILE TRIGGER */
-    .desktop-nav { display: none !important; }
-    .mobile-menu-btn { display: flex !important; }
+    .desktop-menu { display: none !important; }
+    .mobile-toggle { display: flex !important; }
 }
 
 /* ==========================================================================
@@ -1231,7 +1230,6 @@ body {
     width: 100%;
     overflow-x: hidden !important; /* Prevents side-to-side jitter */
     position: relative;
-    overscroll-behavior-y: none; /* Stops the annoying 'bounce' at the top/bottom */
 }
 
 /* 3. GPU Hardware Acceleration for Glass Cards */
@@ -1261,5 +1259,34 @@ body {
         
         /* Disable hover animations on mobile so they don't misfire while scrolling */
         transition: none !important; 
+    }
+}
+
+/* ==========================================================================
+   BULLETPROOF MOBILE FAILSAFES
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    /* Hard lock the body width and prevent ANY accidental horizontal scrolling */
+    html, body {
+        max-width: 100vw;
+        overflow-x: hidden !important;
+        position: relative;
+    }
+
+    /* Ensure absolute positioned background elements never cause overflow */
+    .aurora-container, .hero::before, .hero::after {
+        max-width: 100vw;
+        overflow: hidden !important;
+    }
+
+    /* Force all grids and flex containers to respect max-width */
+    .container, .hero-container, .grid-container, .services-grid, .courses-grid {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Prevent inputs from zooming on iOS */
+    input, select, textarea {
+        font-size: 16px !important;
     }
 }
