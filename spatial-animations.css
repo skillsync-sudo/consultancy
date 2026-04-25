@@ -608,9 +608,13 @@ body:has(button:hover) #cursor-ring {
 
 /* ==========================================================
    19. MOBILE PERFORMANCE OPTIMIZATIONS
-   Disable heavy effects and infinite animations on mobile
    ========================================================== */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
+    /* Hide the custom cursor completely on mobile */
+    #cursor-dot, #cursor-ring {
+        display: none !important;
+    }
+
     /* Disable infinite particle animations / pulses / levitations */
     .hero::before, .consultation-section::before, .page-header::after {
         display: none !important;
