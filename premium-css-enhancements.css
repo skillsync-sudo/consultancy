@@ -1076,3 +1076,190 @@ h1, h2, .section-title {
     opacity: 1;
     transform: scale(1) translateY(0);
 }
+
+/* ==========================================================
+   9. MOBILE CORE LAYOUT OPTIMIZATIONS
+   ========================================================== */
+@media (max-width: 768px) {
+    /* Prevent horizontal scrolling & zoom overflow */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        -webkit-text-size-adjust: 100%;
+        touch-action: manipulation; /* Prevents 300ms click delay */
+    }
+
+    /* Adjust tap highlight for touch devices */
+    * {
+        -webkit-tap-highlight-color: transparent !important;
+    }
+
+    /* Force sensible image scaling */
+    img, svg, video, iframe {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Increase touch targets for links & buttons */
+    a, button, .btn, .nav-cta, .gallery-filter {
+        min-height: 44px !important; 
+        min-width: 44px !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Reset paddings for grids on mobile to avoid overflow */
+    .container {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    .services-grid, .courses-grid, .stats-grid, .testimonials-grid {
+        gap: 16px !important;
+        padding: 8px 0 !important;
+    }
+}
+
+/* ==========================================================================
+   📱 APEX CONSULTANCY: MOBILE & TABLET RESPONSIVE SYSTEM
+   ========================================================================== */
+
+/* 1. FLUID TYPOGRAPHY (Smoothly scales down for phones) */
+h1, .chrome-text {
+    /* clamp(minimum size, preferred scaling size, maximum size) */
+    font-size: clamp(2rem, 8vw, 4rem) !important; 
+    line-height: 1.2;
+}
+
+h2 { font-size: clamp(1.5rem, 5vw, 2.5rem); }
+p { font-size: clamp(0.9rem, 2vw, 1.1rem); }
+
+/* ==========================================================================
+   THE CORE MOBILE BREAKPOINT (Screens smaller than 768px - Phones & Small Tablets)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+
+    /* 2. UNIVERSAL CONTAINER PADDING */
+    /* Prevents text from touching the absolute edges of the phone screen */
+    section, .premium-container, .glass-wrapper {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        overflow-x: hidden; /* Prevents horizontal scrolling/wobble */
+    }
+
+    /* 3. STACKING THE 3D GRIDS (Jobs, Courses, Services) */
+    /* Converts side-by-side desktop grids into vertical, scrollable lists */
+    .grid-container, 
+    .job-listings, 
+    .course-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 25px; /* Adds breathing room between stacked cards */
+    }
+
+    /* Make all glass cards take up the full width of the phone */
+    .glass-card, 
+    .job-card {
+        width: 100% !important;
+        margin: 0 !important;
+        box-sizing: border-box;
+    }
+
+    /* 4. FIXING THE SPATIAL VISA TIMELINE FOR MOBILE */
+    /* Moves the vertical line to the left, instead of the middle */
+    .spatial-track::before {
+        left: 25px; 
+    }
+
+    .track-item, 
+    .track-item:nth-child(even) {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 60px; /* Make room for the line on the left */
+        margin-bottom: 40px;
+    }
+
+    .track-marker {
+        left: 0;
+        transform: none;
+        width: 40px;
+        height: 40px;
+    }
+
+    .track-glass-card {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* 5. PERFORMANCE TUNING FOR MOBILE CHIPS */
+    /* High blur values can make cheap phones lag. We lower it slightly for mobile. */
+    .glass-card, 
+    .track-glass-card {
+        backdrop-filter: blur(15px); /* Reduced from 30px for buttery smooth scrolling */
+        -webkit-backdrop-filter: blur(15px); /* Safari support */
+    }
+
+    /* 6. HIDE DESKTOP MENU, SHOW MOBILE TRIGGER */
+    .desktop-nav { display: none !important; }
+    .mobile-menu-btn { display: flex !important; }
+}
+
+/* ==========================================================================
+   TINY PHONES (iPhone SE, Older Androids - Screens smaller than 400px)
+   ========================================================================== */
+@media screen and (max-width: 400px) {
+    .glass-card {
+        padding: 15px; /* Tighter padding to save screen real estate */
+    }
+}
+
+/* ==========================================================================
+   LIQUID SCROLL & GPU ACCELERATION PROTOCOL
+   ========================================================================== */
+
+/* 1. Base Scroll Physics */
+html {
+    scroll-behavior: smooth;
+    /* Forces momentum-based "flick" scrolling on iPhones */
+    -webkit-overflow-scrolling: touch !important; 
+}
+
+/* 2. Lock the X-Axis (Kills the "Wobble") */
+body {
+    width: 100%;
+    overflow-x: hidden !important; /* Prevents side-to-side jitter */
+    position: relative;
+    overscroll-behavior-y: none; /* Stops the annoying 'bounce' at the top/bottom */
+}
+
+/* 3. GPU Hardware Acceleration for Glass Cards */
+.glass-card, 
+.track-glass-card,
+.job-card {
+    /* translateZ(0) tricks the phone into using the dedicated graphics chip */
+    transform: translateZ(0); 
+    -webkit-transform: translateZ(0);
+    
+    /* Tells the browser to prepare memory for these specific changes */
+    will-change: transform, opacity;
+    
+    /* Performance limit on shadows to save memory on scroll */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2); 
+}
+
+/* 4. The Mobile-Specific Blur Override */
+@media screen and (max-width: 768px) {
+    .glass-card, 
+    .track-glass-card,
+    .job-card {
+        /* Drop the blur down to 10px on mobile. 
+           It still looks premium but stops the processor from choking. */
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+        
+        /* Disable hover animations on mobile so they don't misfire while scrolling */
+        transition: none !important; 
+    }
+}
